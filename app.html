@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personality Quiz</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #f0f4ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .question {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            background: #4c6ef5;
+            width: 100%;
+            font-size: 1rem;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3b5bdb;
+        }
+
+        #result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #edf2ff;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #364fc7;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #4c6ef5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-box">
+        <h2>What Kind of Adventurer Are You?</h2>
+
+        <!-- Question 1 -->
+        <div class="question">1. How do you approach challenges?</div>
+        <label><input type="radio" name="q1" value="strategist"> I make a plan.</label><br>
+        <label><input type="radio" name="q1" value="explorer"> I dive in and adapt.</label><br>
+        <label><input type="radio" name="q1" value="guardian"> I stay cautious and steady.</label><br>
+        <label><input type="radio" name="q1" value="creator"> I try something imaginative.</label><br>
+
+        <!-- Question 2 -->
+        <div class="question">2. What motivates you the most?</div>
+        <label><input type="radio" name="q2" value="strategist"> Solving problems.</label><br>
+        <label><input type="radio" name="q2" value="explorer"> Seeking new experiences.</label><br>
+        <label><input type="radio" name="q2" value="guardian"> Helping people.</label><br>
+        <label><input type="radio" name="q2" value="creator"> Expressing creativity.</label><br>
+
+        <!-- Question 3 -->
+        <div class="question">3. Which sounds the most fun?</div>
+        <label><input type="radio" name="q3" value="strategist"> A strategy game.</label><br>
+        <label><input type="radio" name="q3" value="explorer"> A spontaneous road trip.</label><br>
+        <label><input type="radio" name="q3" value="guardian"> Cooking for friends.</label><br>
+        <label><input type="radio" name="q3" value="creator"> Designing something cool.</label><br>
+
+        <button onclick="showResult()">See My Result</button>
+
+        <div id="result-box">
+            <div class="result-title" id="result-title"></div>
+            <p id="result-description"></p>
+        </div>
+
+        <a href="scratch.html">← Back to Scratch Page</a>
+    </div>
+
+    <script>
+        function showResult() {
+            let answers = [];
+
+            // Collect answers
+            for (let i = 1; i <= 3; i++) {
+                let q = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!q) {
+                    alert("Please answer all questions.");
+                    return;
+                }
+                answers.push(q.value);
+            }
+
+            // Count which personality appears most
+            let counts = {
+                strategist: 0,
+                explorer: 0,
+                guardian: 0,
+                creator: 0
+            };
+
+            answers.forEach(a => counts[a]++);
+
+            let result = Object.keys(counts).reduce((a, b) =>
+                counts[a] > counts[b] ? a : b
+            );
+
+            let title = document.getElementById("result-title");
+            let desc = document.getElementById("result-description");
+            let box = document.getElementById("result-box");
+
+            // Output text based on personality
+            if (result === "strategist") {
+                title.textContent = "You Are: The Strategist";
+                desc.textContent = "You think ahead, make smart plans, and love solving challenges.";
+            } else if (result === "explorer") {
+                title.textContent = "You Are: The Explorer";
+                desc.textContent = "You seek adventure and thrive when discovering new things.";
+            } else if (result === "guardian") {
+                title.textContent = "You Are: The Guardian";
+                desc.textContent = "You're dependable, grounded, and care deeply about people.";
+            } else {
+                title.textContent = "You Are: The Creator";
+                desc.textContent = "You see the world differently and bring imagination to life.";
+            }
+
+            box.style.display = "block";
+        }
+    </script>
+</body>
+</html>
