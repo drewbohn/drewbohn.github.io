@@ -90,3 +90,7 @@ h1, h2 {
     text-align: right;
     margin-top: 40px;
 }
+.profile-img {
+    object-fit: cover;
+    object-position: 30% center;
+}
