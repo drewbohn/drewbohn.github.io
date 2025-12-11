@@ -69,6 +69,67 @@
         <div class="tableau-container">
             <p><em>Replace this box with your Tableau embed code.</em></p>
         </div>
+        <h2>My Mini Web App</h2>
+        <h2>Fantasy Character Quiz</h2>
+<p>Answer these questions to discover your fantasy role!</p>
+
+<div id="quiz">
+    <label>1. What’s your ideal Friday night?</label><br>
+    <select id="q1">
+        <option value="tavernkeep">Hosting friends</option>
+        <option value="drunk">Causing chaos</option>
+        <option value="wizard">Studying something interesting</option>
+        <option value="knight">Training or working out</option>
+        <option value="peasant">Relaxing at home</option>
+    </select>
+    <br><br>
+
+    <label>2. Choose a weapon:</label><br>
+    <select id="q2">
+        <option value="tavernkeep">A frying pan</option>
+        <option value="drunk">A broken bottle</option>
+        <option value="wizard">A magic staff</option>
+        <option value="knight">A sword</option>
+        <option value="peasant">A shovel</option>
+    </select>
+    <br><br>
+
+    <label>3. Pick your greatest strength:</label><br>
+    <select id="q3">
+        <option value="tavernkeep">Hospitality</option>
+        <option value="drunk">Fearlessness</option>
+        <option value="wizard">Intelligence</option>
+        <option value="knight">Courage</option>
+        <option value="peasant">Hard work</option>
+    </select>
+    <br><br>
+
+    <button onclick="getResult()">Get Your Character</button>
+
+    <h3 id="result"></h3>
+</div>
+
+<script>
+function getResult() {
+    let answers = [q1.value, q2.value, q3.value];
+
+    // Count most frequent answer
+    let tally = {};
+    answers.forEach(a => tally[a] = (tally[a] || 0) + 1);
+
+    let result = Object.keys(tally).reduce((a,b) => tally[a] > tally[b] ? a : b);
+
+    let roles = {
+        tavernkeep: "Tavernkeep 🍻 — Friendly, steady, reliable.",
+        drunk: "Town Drunk 🍺 — Chaotic but lovable.",
+        wizard: "Wizard 🪄 — Intelligent and mysterious.",
+        knight: "Knight 🛡️ — Brave and disciplined.",
+        peasant: "Peasant 🌾 — Humble, hardworking, and grounded."
+    };
+
+    document.getElementById("result").innerText = roles[result];
+}
+</script>
 
         <h2>My Mini Web App</h2>
         <p><a href="app.html">Click here to open my number guessing game!</a></p>
