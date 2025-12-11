@@ -189,3 +189,18 @@ h1, h2 {
     font-weight: 800;
     margin-top: 25px;
 }
+.tableau-container {
+    width: 100%;
+    max-width: 900px;   /* fits inside your content width */
+    margin: 20px auto;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.tableau-container object {
+    width: 100% !important;
+    max-width: 100%;
+}
