@@ -77,66 +77,80 @@
         <div class="tableau-container">
             <p><em>Replace this box with your Tableau embed code.</em></p>
         </div>
-        <h2>My Mini Web App</h2>
-        <h2 id="quiz-section">Fantasy Character Quiz</h2>
-<p>Answer these questions to discover your fantasy role!</p>
+        <!-- ========================= -->
+<!-- ⭐ FANTASY CHARACTER QUIZ ⭐ -->
+<!-- ========================= -->
 
-<div id="quiz">
-    <label>1. What’s your ideal Friday night?</label><br>
-    <select id="q1">
-        <option value="tavernkeep">Hosting friends</option>
-        <option value="drunk">Causing chaos</option>
-        <option value="wizard">Studying something interesting</option>
-        <option value="knight">Training or working out</option>
-        <option value="peasant">Relaxing at home</option>
-    </select>
-    <br><br>
+<section id="quiz">
+    <div class="quiz-box">
+        <h2>Fantasy Character Quiz</h2>
+        <p>Answer these questions to discover your fantasy role!</p>
 
-    <label>2. Choose a weapon:</label><br>
-    <select id="q2">
-        <option value="tavernkeep">A frying pan</option>
-        <option value="drunk">A broken bottle</option>
-        <option value="wizard">A magic staff</option>
-        <option value="knight">A sword</option>
-        <option value="peasant">A shovel</option>
-    </select>
-    <br><br>
+        <div class="quiz-question">
+            <label>1. What’s your ideal Friday night?</label>
+            <select id="q1">
+                <option value="tavernkeep">Hosting friends</option>
+                <option value="wizard">Reading alone</option>
+                <option value="knight">Training at the gym</option>
+                <option value="townDrunk">Causing chaos</option>
+                <option value="peasant">Napping</option>
+            </select>
+        </div>
 
-    <label>3. Pick your greatest strength:</label><br>
-    <select id="q3">
-        <option value="tavernkeep">Hospitality</option>
-        <option value="drunk">Fearlessness</option>
-        <option value="wizard">Intelligence</option>
-        <option value="knight">Courage</option>
-        <option value="peasant">Hard work</option>
-    </select>
-    <br><br>
+        <div class="quiz-question">
+            <label>2. Choose a weapon:</label>
+            <select id="q2">
+                <option value="tavernkeep">A frying pan 🍳</option>
+                <option value="wizard">A magic staff ✨</option>
+                <option value="knight">A longsword ⚔️</option>
+                <option value="townDrunk">A broken bottle 🍾</option>
+                <option value="peasant">A rusty shovel 🛠️</option>
+            </select>
+        </div>
 
-    <button onclick="getResult()">Get Your Character</button>
+        <div class="quiz-question">
+            <label>3. Pick your greatest strength:</label>
+            <select id="q3">
+                <option value="tavernkeep">Hospitality</option>
+                <option value="wizard">Wisdom</option>
+                <option value="knight">Bravery</option>
+                <option value="townDrunk">Unpredictability</option>
+                <option value="peasant">Endurance</option>
+            </select>
+        </div>
 
-    <h3 id="result"></h3>
-</div>
+        <button class="quiz-button" onclick="getCharacter()">Get Your Character</button>
 
+        <div id="result" class="quiz-result"></div>
+    </div>
+</section>
+
+<!-- QUIZ SCRIPT -->
 <script>
-function getResult() {
-    let answers = [q1.value, q2.value, q3.value];
+function getCharacter() {
+    const q1 = document.getElementById("q1").value;
+    const q2 = document.getElementById("q2").value;
+    const q3 = document.getElementById("q3").value;
 
-    // Count most frequent answer
-    let tally = {};
-    answers.forEach(a => tally[a] = (tally[a] || 0) + 1);
+    const scores = { tavernkeep: 0, townDrunk: 0, wizard: 0, knight: 0, peasant: 0 };
 
-    let result = Object.keys(tally).reduce((a,b) => tally[a] > tally[b] ? a : b);
+    scores[q1]++;
+    scores[q2]++;
+    scores[q3]++;
 
-    let roles = {
-        tavernkeep: "Tavernkeep 🍻 — Friendly, steady, reliable.",
-        drunk: "Town Drunk 🍺 — Chaotic but lovable.",
-        wizard: "Wizard 🪄 — Intelligent and mysterious.",
-        knight: "Knight 🛡️ — Brave and disciplined.",
-        peasant: "Peasant 🌾 — Humble, hardworking, and grounded."
+    let best = "tavernkeep";
+    for (const key in scores) {
+        if (scores[key] > scores[best]) best = key;
+    }
+
+    const descriptions = {
+        tavernkeep: "You are the **Tavernkeep** — warm, reliable, and the heart of the community.",
+        townDrunk: "You are the **Town Drunk** — chaotic, unpredictable, oddly lovable.",
+        wizard: "You are the **Wizard** — thoughtful, intelligent, and full of hidden power.",
+        knight: "You are the **Knight** — disciplined, brave, and loyal to a fault.",
+        peasant: "You are the **Peasant** — humble, resilient, and tougher than you look."
     };
 
-    document.getElementById("result").innerText = roles[result];
+    document.getElementById("result").innerHTML = descriptions[best];
 }
 </script>
-
-       
